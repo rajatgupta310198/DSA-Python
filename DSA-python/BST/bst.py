@@ -11,27 +11,32 @@ class Node:
         self.rc = None
 
 
-class BST:
-    def __init__(self,data):
-        self.Root = Node(data)
+def insert(node,data):
+    if node is None:
+        node = Node(data)
+        return node
 
-    def insert(self,Root,data):
-        if Root is None:
-            t = Node(data)
-            return t;
+    else:
+        if data <node.data:
+            node.lc = insert(node.lc,data)
 
-        else:
-            if data < self.Root.data:
-                self.Root.lc = self.insert(self.Root.lc,data)
+        if data > node.data:
+            node.rc = insert(node.rc,data)
 
-            if data > self.Root.data:
-                self.Root.rc = self.insert(self.Root.rc,data)
+        return node
+def inOrder(node):
+    if node:
+        inOrder(node.lc)
+        print(node.data)
+        inOrder(node.rc)
 
-            return self.Root
-
-
-    def inOrder(self,Root):
-        if(Root):
-            inOrder(self.Root.lc)
-            print(self.Root.data)
-            inOrder(self.Root.rc)
+if __name__ == '__main__':
+    mytree = Node(5)
+    mytree = insert(mytree,3)
+    mytree = insert(mytree,1)
+    mytree = insert(mytree,2)
+    mytree = insert(mytree,4)
+    mytree = insert(mytree,7)
+    mytree = insert(mytree,6)
+    mytree = insert(mytree,8)
+    inOrder(mytree)
