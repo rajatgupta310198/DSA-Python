@@ -24,11 +24,33 @@ def insert(node,data):
             node.rc = insert(node.rc,data)
 
         return node
+
 def inOrder(node):
     if node:
         inOrder(node.lc)
         print(node.data)
         inOrder(node.rc)
+
+def search(node,key):
+    while node:
+        if key < node.data:
+            node = node.lc
+
+        if key > node.data:
+            node = node.rc
+
+        if key == node.data:
+            print("Found")
+            return
+            break;
+
+
+    print("Not found")
+
+
+
+
+
 
 if __name__ == '__main__':
     mytree = Node(5)
@@ -40,3 +62,5 @@ if __name__ == '__main__':
     mytree = insert(mytree,6)
     mytree = insert(mytree,8)
     inOrder(mytree)
+    search(mytree,6)
+    search(mytree,10)
